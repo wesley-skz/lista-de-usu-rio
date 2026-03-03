@@ -1,55 +1,53 @@
-// Lista de convidados
-const convidados = [
-    "Alice", "Bruna", "Amanda", "Carlos", "Ana", "Fernando", "Aline", "Juliana", "Mateus", "André"
-];
+// Iniciamos com a sua lista original
+let convidados = ["Ana", "Bruno", "Amanda", "Carlos", "Beatriz", "Alberto", "Ricardo"];
 
-// Função para iniciar as listas e tabs
-function init() {
-    const convidadosList = document.getElementById('convidados-list');
-    const letraAList = document.getElementById('letraA-list');
-    const maisCincoList = document.getElementById('maisCinco-list');
+const inputNome = document.getElementById('novoNome');
+const listaVisual = document.getElementById('listaVisual');
+const resultDisplay = document.getElementById('result');
 
-    // Preencher a lista de convidados
+// Função para exibir os nomes na tela como etiquetas (tags)
+function atualizarInterface() {
+    listaVisual.innerHTML = "";
     convidados.forEach(nome => {
-        const li = document.createElement('li');
-        li.textContent = nome.toUpperCase(); // Coloca o nome em maiúsculas
-        convidadosList.appendChild(li);
+        const span = document.createElement('span');
+        span.className = 'tag';
+        span.textContent = nome;
+        listaVisual.appendChild(span);
     });
-
-    // Filtrar convidados que começam com a letra 'A'
-    const convidadosA = convidados.filter(nome => nome.toLowerCase().startsWith('a'));
-    convidadosA.forEach(nome => {
-        const li = document.createElement('li');
-        li.textContent = nome.toUpperCase();
-        letraAList.appendChild(li);
-    });
-
-    // Filtrar convidados com mais de 5 letras
-    const convidadosCinco = convidados.filter(nome => nome.length > 5);
-    convidadosCinco.forEach(nome => {
-        const li = document.createElement('li');
-        li.textContent = nome.toUpperCase();
-        maisCincoList.appendChild(li);
-    });
-
-    // Exibir a aba inicial
-    openTab('convidados');
 }
 
-// Função para abrir as abas
-function openTab(tabName) {
-    // Esconde todas as abas
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(tab => {
-        tab.classList.remove('active');
-    });
-
-    // Exibe a aba correspondente
-    const activeTab = document.getElementById(tabName);
-    if (activeTab) {
-        activeTab.classList.add('active');
+// Adiciona novo convidado à lista
+function adicionarConvidado() {
+    const nome = inputNome.value.trim();
+    if (nome !== "") {
+        convidados.push(nome);
+        inputNome.value = "";
+        inputNome.focus();
+        atualizarInterface();
     }
 }
 
-// Inicializa o site
-window.onload = init;
+// Permite adicionar apertando "Enter" no teclado
+inputNome.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') adicionarConvidado();
+});
+
+// --- Lógica do Algoritmo Original ---
+
+function transformarMaiusculas() {
+    const maiusculos = convidados.map(n => n.toUpperCase());
+    resultDisplay.textContent = `[ ${maiusculos.join(", ")} ]`;
+}
+
+function contarNomesComA() {
+    const total = convidados.filter(n => n.toUpperCase().startsWith("A")).length;
+    resultDisplay.innerHTML = `Total que começa com 'A': <span style="color:white">${total}</span>`;
+}
+
+function filtrarNomesLongos() {
+    const longos = convidados.filter(n => n.length > 5);
+    resultDisplay.textContent = longos.length > 0 ? `[ ${longos.join(", ")} ]` : "Nenhum encontrado.";
+}
+
+// Inicializa a lista ao carregar a página
+atualizarInterface();
