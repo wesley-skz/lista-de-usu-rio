@@ -3,39 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Convidados</title>
+    <title>Guest List Pro</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <h1>Lista de Evento</h1>
-        
-        <div class="tabs">
-            <button onclick="showTab('todos')">Todos os Convidados</button>
-            <button onclick="showTab('letra-a')">Iniciam com "A"</button>
-            <button onclick="showTab('longos')">Mais de 5 Letras</button>
-        </div>
-
-        <hr>
-
-        <div id="todos" class="tab-content active">
-            <h2>Todos os Convidados</h2>
-            <ul id="lista-todos"></ul>
-        </div>
-
-        <div id="letra-a" class="tab-content">
-            <h2>Nomes com a Letra "A"</h2>
-            <p id="contagem-a" class="badge"></p>
-            <ul id="lista-a"></ul>
-        </div>
-
-        <div id="longos" class="tab-content">
-            <h2>Nomes Longos (+5 letras)</h2>
-            <p id="contagem-longos" class="badge"></p>
-            <ul id="lista-longos"></ul>
-        </div>
+    <div class="background-circles">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
     </div>
+
+    <main class="glass-card">
+        <header>
+            <h1>Guest List<span>.io</span></h1>
+            <p>Gerenciamento inteligente de convidados</p>
+        </header>
+        
+        <nav class="tabs-container">
+            <button class="tab-btn active" onclick="showTab(event, 'todos')">Todos</button>
+            <button class="tab-btn" onclick="showTab(event, 'letra-a')">Letra A</button>
+            <button class="tab-btn" onclick="showTab(event, 'longos')">Nomes Longos</button>
+        </nav>
+
+        <section class="content-wrapper">
+            <div id="todos" class="tab-content active">
+                <div class="list-header">
+                    <h3>Lista Completa</h3>
+                    <span class="counter" id="total-geral">0</span>
+                </div>
+                <ul id="lista-todos" class="styled-list"></ul>
+            </div>
+
+            <div id="letra-a" class="tab-content">
+                <div class="list-header">
+                    <h3>Iniciam com "A"</h3>
+                    <span class="counter" id="contagem-a">0</span>
+                </div>
+                <ul id="lista-a" class="styled-list"></ul>
+            </div>
+
+            <div id="longos" class="tab-content">
+                <div class="list-header">
+                    <h3>Mais de 5 Letras</h3>
+                    <span class="counter" id="contagem-longos">0</span>
+                </div>
+                <ul id="lista-longos" class="styled-list"></ul>
+            </div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
