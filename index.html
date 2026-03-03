@@ -3,63 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Guest Manager</title>
+    <title>Sistema de Convidados Premium</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="logo">Event<span>Flow</span></div>
-            <nav>
-                <button class="nav-btn active" onclick="openTab(event, 'home')">Início</button>
-                <button class="nav-btn" onclick="openTab(event, 'todos')">Convidados</button>
-                <button class="nav-btn" onclick="openTab(event, 'letra-a')">Filtro Letra A</button>
-                <button class="nav-btn" onclick="openTab(event, 'longos')">Nomes Longos</button>
-            </nav>
-            <div class="footer-sidebar">v1.0.2</div>
-        </aside>
+    <div class="main-card">
+        <nav class="sidebar">
+            <div class="brand">
+                <h2>EVENT<span>PRO</span></h2>
+            </div>
+            <div class="nav-links">
+                <button class="nav-item active" onclick="switchTab(event, 'tab-home')">Dashboard</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-todos')">Todos Convidados</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-letra-a')">Iniciam com 'A'</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-longos')">Nomes Longos</button>
+            </div>
+        </nav>
 
-        <main class="content">
+        <main class="content-area">
             
-            <section id="home" class="tab-content active">
-                <div class="hero">
-                    <h1>Bem-vindo ao seu <br>Gerenciador de Elite</h1>
-                    <p>Organize seus eventos com elegância e precisão técnica.</p>
-                    <div class="stats-overview">
-                        <div class="stat-card">
-                            <span id="stat-total">0</span>
-                            <label>Total</label>
+            <section id="tab-home" class="tab-pane active">
+                <div class="welcome-box">
+                    <h1>Olá, Administrador</h1>
+                    <p>Aqui está o resumo estatístico do seu evento hoje.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span id="stat-total-val">0</span>
+                            <small>Total de Convidados</small>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="todos" class="tab-content">
-                <div class="header-section">
+            <section id="tab-todos" class="tab-pane">
+                <div class="section-header">
                     <h2>Lista Completa</h2>
-                    <p>Todos os convidados registrados no sistema.</p>
+                    <p>Exibindo todos os nomes em caixa alta.</p>
                 </div>
-                <ul id="lista-todos" class="grid-list"></ul>
+                <ul id="lista-geral" class="name-grid"></ul>
             </section>
 
-            <section id="letra-a" class="tab-content">
-                <div class="header-section">
-                    <h2>Iniciam com "A"</h2>
-                    <p>Filtro automático para nomes com a inicial A.</p>
+            <section id="tab-letra-a" class="tab-pane">
+                <div class="section-header">
+                    <h2>Filtro: Letra A</h2>
+                    <p>Nomes que começam com a primeira letra do alfabeto.</p>
+                    <div class="badge" id="badge-a">0 Encontrados</div>
                 </div>
-                <div class="counter-badge" id="count-a">0 encontrados</div>
-                <ul id="lista-a" class="grid-list"></ul>
+                <ul id="lista-a" class="name-grid"></ul>
             </section>
 
-            <section id="longos" class="tab-content">
-                <div class="header-section">
-                    <h2>Mais de 5 Letras</h2>
-                    <p>Convidados com nomes extensos detectados.</p>
+            <section id="tab-longos" class="tab-pane">
+                <div class="section-header">
+                    <h2>Filtro: Nomes Longos</h2>
+                    <p>Nomes que possuem mais de 5 caracteres.</p>
+                    <div class="badge" id="badge-longos">0 Encontrados</div>
                 </div>
-                <div class="counter-badge" id="count-longos">0 encontrados</div>
-                <ul id="lista-longos" class="grid-list"></ul>
+                <ul id="lista-longos" class="name-grid"></ul>
             </section>
 
         </main>
