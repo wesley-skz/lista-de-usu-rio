@@ -1,51 +1,55 @@
-// Base de dados
-const convidados = ["Ana", "Bernardo", "Alice", "Gustavo", "Amanda", "Pedro", "Arthur", "Beatriz", "Caio"];
+const convidados = ["Ana", "Bernardo", "Alice", "Gustavo", "Amanda", "Pedro", "Arthur", "Beatriz", "Caio", "Mariana", "Leonardo"];
 
-function inicializarListas() {
-    const listaTodos = document.getElementById('lista-todos');
-    const listaA = document.getElementById('lista-a');
-    const listaLongos = document.getElementById('lista-longos');
+function popularListas() {
+    const elementos = {
+        todos: document.getElementById('lista-todos'),
+        letraA: document.getElementById('lista-a'),
+        longos: document.getElementById('lista-longos')
+    };
 
-    let countA = 0;
-    let countLongos = 0;
+    let counts = { a: 0, longos: 0 };
 
-    // Loop principal para processar os nomes
+    // Limpar listas antes de popular (boa prática)
+    Object.values(elementos).forEach(el => el.innerHTML = '');
+
+    // Loop com template strings para código mais limpo
     convidados.forEach(nome => {
-        const nomeMaiusculo = nome.toUpperCase(); // Transformando em maiúsculas via JS
-        const li = document.createElement('li');
-        li.textContent = nomeMaiusculo;
+        const UPPER = nome.toUpperCase();
+        const li = `<li>${UPPER}</li>`;
 
-        // 1. Adiciona à lista geral
-        listaTodos.appendChild(li.cloneNode(true));
+        // Todos
+        elementos.todos.innerHTML += li;
 
-        // 2. Filtra nomes que começam com "A"
-        if (nomeMaiusculo.startsWith('A')) {
-            listaA.appendChild(li.cloneNode(true));
-            countA++;
+        // Começam com A
+        if (UPPER.startsWith('A')) {
+            elementos.letraA.innerHTML += li;
+            counts.a++;
         }
 
-        // 3. Filtra nomes com mais de 5 letras
+        // Mais de 5 letras
         if (nome.length > 5) {
-            listaLongos.appendChild(li.cloneNode(true));
-            countLongos++;
+            elementos.longos.innerHTML += li;
+            counts.longos++;
         }
     });
 
-    // Atualiza os contadores na tela
-    document.getElementById('contagem-a').textContent = `Total: ${countA}`;
-    document.getElementById('contagem-longos').textContent = `Total: ${countLongos}`;
+    // Atualizar indicadores visuais
+    document.getElementById('total-geral').textContent = convidados.length;
+    document.getElementById('contagem-a').textContent = counts.a;
+    document.getElementById('contagem-longos').textContent = counts.longos;
 }
 
-// Função para trocar de aba
-function showTab(tabId) {
-    // Remove classe 'active' de todos
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
-    });
+function showTab(event, tabId) {
+    // Esconder todos os conteúdos
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
     
-    // Adiciona apenas na selecionada
+    // Remover classe ativa de todos os botões
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+    // Mostrar a aba atual e ativar o botão clicado
     document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
 }
 
-// Executa ao carregar a página
-window.onload = inicializarListas;
+// Iniciar
+window.onload = popularListas;
