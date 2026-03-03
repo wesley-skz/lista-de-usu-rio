@@ -3,69 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Convidados Premium</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Lista de Convidados</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Lista de Convidados</h1>
+        
+        <div class="tabs">
+            <button class="tab-button" onclick="openTab('convidados')">Convidados</button>
+            <button class="tab-button" onclick="openTab('letraA')">Começam com A</button>
+            <button class="tab-button" onclick="openTab('maisCinco')">Mais de 5 Letras</button>
+        </div>
 
-    <div class="main-card">
-        <nav class="sidebar">
-            <div class="brand">
-                <h2>EVENT<span>PRO</span></h2>
-            </div>
-            <div class="nav-links">
-                <button class="nav-item active" onclick="switchTab(event, 'tab-home')">Dashboard</button>
-                <button class="nav-item" onclick="switchTab(event, 'tab-todos')">Todos Convidados</button>
-                <button class="nav-item" onclick="switchTab(event, 'tab-letra-a')">Iniciam com 'A'</button>
-                <button class="nav-item" onclick="switchTab(event, 'tab-longos')">Nomes Longos</button>
-            </div>
-        </nav>
+        <div id="convidados" class="tab-content">
+            <h2>Lista de Convidados</h2>
+            <ul id="convidados-list"></ul>
+        </div>
 
-        <main class="content-area">
-            
-            <section id="tab-home" class="tab-pane active">
-                <div class="welcome-box">
-                    <h1>Olá, Administrador</h1>
-                    <p>Aqui está o resumo estatístico do seu evento hoje.</p>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span id="stat-total-val">0</span>
-                            <small>Total de Convidados</small>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <div id="letraA" class="tab-content">
+            <h2>Convidados que começam com A</h2>
+            <ul id="letraA-list"></ul>
+        </div>
 
-            <section id="tab-todos" class="tab-pane">
-                <div class="section-header">
-                    <h2>Lista Completa</h2>
-                    <p>Exibindo todos os nomes em caixa alta.</p>
-                </div>
-                <ul id="lista-geral" class="name-grid"></ul>
-            </section>
-
-            <section id="tab-letra-a" class="tab-pane">
-                <div class="section-header">
-                    <h2>Filtro: Letra A</h2>
-                    <p>Nomes que começam com a primeira letra do alfabeto.</p>
-                    <div class="badge" id="badge-a">0 Encontrados</div>
-                </div>
-                <ul id="lista-a" class="name-grid"></ul>
-            </section>
-
-            <section id="tab-longos" class="tab-pane">
-                <div class="section-header">
-                    <h2>Filtro: Nomes Longos</h2>
-                    <p>Nomes que possuem mais de 5 caracteres.</p>
-                    <div class="badge" id="badge-longos">0 Encontrados</div>
-                </div>
-                <ul id="lista-longos" class="name-grid"></ul>
-            </section>
-
-        </main>
+        <div id="maisCinco" class="tab-content">
+            <h2>Convidados com mais de 5 letras</h2>
+            <ul id="maisCinco-list"></ul>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
