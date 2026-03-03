@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Convidados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Lista de Convidados</h1>
+        
+        <div class="input-section">
+            <input type="text" id="nomeInput" placeholder="Digite um nome...">
+            <button onclick="adicionarNome()">Adicionar</button>
+        </div>
+
+        <div class="tab-menu">
+            <button class="tab-btn active" onclick="abrirAba('todos')">Todos</button>
+            <button class="tab-btn" onclick="abrirAba('comecaComA')">Começam com 'A'</button>
+            <button class="tab-btn" onclick="abrirAba('longos')">Mais de 5 Letras</button>
+        </div>
+
+        <div id="todos" class="tab-content active">
+            <h2>Todos os Convidados</h2>
+            <ul id="listaTodos"></ul>
+        </div>
+
+        <div id="comecaComA" class="tab-content">
+            <h2>Iniciam com "A"</h2>
+            <p id="contagemA">Total: 0</p>
+            <ul id="listaA"></ul>
+        </div>
+
+        <div id="longos" class="tab-content">
+            <h2>Nomes Longos (> 5 letras)</h2>
+            <p id="contagemLongos">Total: 0</p>
+            <ul id="listaLongos"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
