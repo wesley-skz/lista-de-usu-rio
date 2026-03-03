@@ -1,63 +1,65 @@
-// Banco de dados simulado
-const listaConvidados = [
-    "Adriano", "Beatriz", "Amanda", "Carlos", "Augusto", 
-    "Daniela", "Eduardo", "Aline", "Fernando", "Gabriel", 
-    "Arthur", "Heloísa", "Isabela", "Jack", "Alessandro"
+// Dados do sistema
+const convidados = [
+    "Alice", "Bruno", "Amanda", "Caio", "Beatriz", 
+    "Augusto", "Daniel", "Aline", "Fernando", "Gabriel", 
+    "Adriano", "Helena", "Ítalo", "Jefferson", "Alexandre"
 ];
 
-function inicializarSistema() {
-    const listTodos = document.getElementById('lista-todos');
-    const listA = document.getElementById('lista-a');
-    const listLongos = document.getElementById('lista-longos');
+// Função principal disparada ao carregar o site
+document.addEventListener('DOMContentLoaded', () => {
+    renderizarListas();
+});
+
+function renderizarListas() {
+    const containerGeral = document.getElementById('lista-geral');
+    const containerA = document.getElementById('lista-a');
+    const containerLongos = document.getElementById('lista-longos');
 
     let countA = 0;
     let countLongos = 0;
 
-    // Loop para processar os nomes
-    for (let i = 0; i < listaConvidados.length; i++) {
-        const nomeOriginal = listaConvidados[i];
-        const nomeUpper = nomeOriginal.toUpperCase(); // Requisito: Maiúsculas via loop
-
-        // Criar elemento visual
+    // LOOP: Processando cada nome
+    for (let i = 0; i < convidados.length; i++) {
+        const nomeOriginal = convidados[i];
+        const nomeFormatado = nomeOriginal.toUpperCase(); // Transformação obrigatória
+        
+        // Criar o elemento de lista (LI)
         const li = document.createElement('li');
-        li.textContent = nomeUpper;
+        li.textContent = nomeFormatado;
 
-        // Adicionar na lista geral
-        listTodos.appendChild(li.cloneNode(true));
+        // 1. Adicionar à lista geral
+        containerGeral.appendChild(li.cloneNode(true));
 
-        // Filtro: Começa com A
-        if (nomeUpper.startsWith('A')) {
-            listA.appendChild(li.cloneNode(true));
+        // 2. Lógica para nomes com letra 'A'
+        if (nomeFormatado.startsWith('A')) {
+            containerA.appendChild(li.cloneNode(true));
             countA++;
         }
 
-        // Filtro: Mais de 5 letras
+        // 3. Lógica para nomes com mais de 5 letras
         if (nomeOriginal.length > 5) {
-            listLongos.appendChild(li.cloneNode(true));
+            containerLongos.appendChild(li.cloneNode(true));
             countLongos++;
         }
     }
 
-    // Atualizar contadores na interface
-    document.getElementById('stat-total').innerText = listaConvidados.length;
-    document.getElementById('count-a').innerText = `${countA} convidados encontrados`;
-    document.getElementById('count-longos').innerText = `${countLongos} convidados encontrados`;
+    // Atualizar números na interface
+    document.getElementById('stat-total-val').textContent = convidados.length;
+    document.getElementById('badge-a').textContent = `${countA} Encontrados`;
+    document.getElementById('badge-longos').textContent = `${countLongos} Encontrados`;
 }
 
-// Lógica de navegação entre abas
-function openTab(event, tabId) {
+// Função para trocar de abas
+function switchTab(event, tabId) {
     // Esconder todas as abas
-    const contents = document.querySelectorAll('.tab-content');
-    contents.forEach(content => content.classList.remove('active'));
+    const tabs = document.querySelectorAll('.tab-pane');
+    tabs.forEach(t => t.classList.remove('active'));
 
-    // Remover estado ativo dos botões
-    const buttons = document.querySelectorAll('.nav-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
+    // Desativar todos os botões
+    const btns = document.querySelectorAll('.nav-item');
+    btns.forEach(b => b.classList.remove('active'));
 
-    // Mostrar aba selecionada e ativar botão
+    // Ativar a selecionada
     document.getElementById(tabId).classList.add('active');
     event.currentTarget.classList.add('active');
 }
-
-// Iniciar quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', inicializarSistema);
